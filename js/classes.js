@@ -15,7 +15,24 @@ class Player extends Entity {
     super();
     this.sprite += 'char-boy.png';
     this.handleInput = function(dir) {
-      console.log (dir);
+      switch(dir) {
+        case 'up':
+          if (this.y>0){
+            this.y--;
+          }break;
+        case 'down':
+          if (this.y<5){
+            this.y++;
+          }break;
+        case 'left':
+          if (this.x>0){
+            this.x--;
+          }break;
+        case 'right':
+          if (this.x<4){
+            this.x++;
+          }break;
+      }
     };
   }
 }
@@ -26,5 +43,14 @@ class Enemy extends Entity {
     this.sprite += 'enemy-bug.png';
     this.x = x;
     this.y = y;
+    this.speed = Math.random()/10;
+    this.update = function (){
+      if (this.x<5){
+        this.x += this.speed;
+      } else if (this.x = 5) {
+        allEnemies.pop(this);
+        allEnemies.push(new Enemy(0,Math.floor(Math.random()*4)+1))
+      }
+    }
   }
 }
