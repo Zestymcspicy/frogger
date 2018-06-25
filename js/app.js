@@ -47,3 +47,10 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+ function checkCollisions(){
+   for (let enemy of allEnemies){
+     if (Math.floor(enemy.x)===player.x&&Math.floor(enemy.y)===player.y){
+       console.log("boom!");
+     }
+   }
+ }

@@ -43,13 +43,12 @@ class Enemy extends Entity {
     this.sprite += 'enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.speed = Math.random()/10;
+    this.speed = Math.random()/30;
     this.update = function (){
       if (this.x<5){
         this.x += this.speed;
-      } else if (this.x = 5) {
+      } else if (this.x > 5) {
         allEnemies.pop(this);
-        allEnemies.push(new Enemy(0,Math.floor(Math.random()*4)+1))
       }
     }
   }
