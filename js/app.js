@@ -35,11 +35,9 @@
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 const player = new Player();
-const allEnemies = [...Array(4)].map((_,i)=> new Enemy(0,Math.floor(Math.random()*4)+1));
-const enemyRespawn = function() {
-  new Enemy(0,Math.floor(Math.random()*4)+1);
-  this.render;
-}
+const allEnemies = [...Array(5)].map((_,i)=> new Enemy(0,Math.floor(Math.random()*4)+1));
+
+
 
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
@@ -51,10 +49,10 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
- function checkCollisions(){
-   for (let enemy of allEnemies){
-     if (Math.floor(enemy.x)===player.x&&Math.floor(enemy.y)===player.y){
-       console.log("boom!");
-     }
-   }
- }
+ // function checkCollisions(){
+ //   for (let enemy of allEnemies){
+ //     if (Math.floor(enemy.x)===player.x&&Math.floor(enemy.y)===player.y){
+ //       console.log("boom!");
+ //     }
+ //   }
+ // }

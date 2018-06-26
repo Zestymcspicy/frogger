@@ -14,7 +14,8 @@ class Player extends Entity {
   constructor () {
     super();
     this.sprite += 'char-boy.png';
-    this.handleInput = function(dir) {
+  }
+    handleInput(dir) {
       switch(dir) {
         case 'up':
           if (this.y>0){
@@ -34,8 +35,23 @@ class Player extends Entity {
           }break;
       }
     };
+    checkCollisions() {
+      for (let enemy of allEnemies){
+        if (Math.floor(enemy.x)===player.x&&Math.floor(enemy.y)===player.y){
+          alert("You got smoked son!");
+          this.x=2;
+          this.y=5;
+          allEnemies.map(bug => bug.x=4.9999999999);
+        }
+        }
+    };
+    checkWin() {
+      if (this.y === 0) {
+        alert('You Win!');
+      }
+    }
   }
-}
+
 
 class Enemy extends Entity {
   constructor(x, y){
@@ -43,7 +59,7 @@ class Enemy extends Entity {
     this.sprite += 'enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.speed = Math.random()/30;
+    this.speed = Math.random()/20;
   }
     update(dt){
       if (this.x<5){
@@ -51,7 +67,7 @@ class Enemy extends Entity {
       } else if (this.x > 5) {
         this.x =-1;
         this.y =Math.floor(Math.random()*4)+1;
-        this.speed = Math.random()/30;
+        this.speed = Math.random()/20;
       }
     }
   }
