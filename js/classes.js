@@ -2,7 +2,7 @@ class Entity {
   constructor() {
     this.sprite = 'images/'
     this.x = 2;
-    this.y = 5
+    this.y = 5;
   }
 
   render() {
@@ -44,12 +44,14 @@ class Enemy extends Entity {
     this.x = x;
     this.y = y;
     this.speed = Math.random()/30;
-    this.update = function (){
+  }
+    update(dt){
       if (this.x<5){
         this.x += this.speed;
       } else if (this.x > 5) {
-        allEnemies.pop(this);
+        this.x =-1;
+        this.y =Math.floor(Math.random()*4)+1;
+        this.speed = Math.random()/30;
       }
     }
   }
-}
