@@ -36,24 +36,36 @@ class Player extends Entity {
       }
     };
     resetChar() {
+      this.sprite = 'images/char-boy.png'
       this.x=2;
       this.y=5;
     };
     checkCollisions(dt) {
       for (let enemy of allEnemies){
-        if (Math.floor(enemy.x)===player.x&&Math.floor(enemy.y)===player.y){
-          this.resetChar();
-          allEnemies.map(bug => bug.x=4.9999999999);
+        if (Math.floor(enemy.x)===player.x && enemy.y===player.y){
+          this.playerDeath();
+          allEnemies.map(bug => bug.speed=0);
+          setTimeout(function () {
+            player.resetChar();
+            allEnemies.map(bug => bug.x=5.1);
+          }, 1500);
         }
         }
     };
     checkWin(dt) {
       if (this.y === 0) {
-        this.resetChar()
-        console.log('You Win!');
-      }
+        this.sprite = 'images/char-boy-win.png';
+        setTimeout(function (){
+          player.resetChar();
+          console.log('You Win!');
+      },3000);
     }
   }
+  playerDeath(dt){
+    this.sprite = 'images/char-boy-dead.png';
+
+  }
+}
 
 
 class Enemy extends Entity {
@@ -69,7 +81,7 @@ class Enemy extends Entity {
         this.x += this.speed;
         /*will restart the enemy at the left side of the screen
         with a new random speed and y position*/
-      } else if (this.x > 5) {
+      } else if (this.x >= 5) {
         this.x =-1;
         this.y =Math.floor(Math.random()*3)+1;
         this.speed = Math.random()/20+.01;
