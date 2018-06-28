@@ -37,7 +37,7 @@ class Player extends Entity {
     };
     checkCollisions() {
       for (let enemy of allEnemies){
-        if (Math.floor(enemy.x)===player.x&&Math.floor(enemy.y)===player.y){
+        if (Math.ceil(enemy.x)===player.x&&enemy.y===player.y){
           alert("You got smoked son!");
           this.x=2;
           this.y=5;
@@ -48,6 +48,7 @@ class Player extends Entity {
     checkWin() {
       if (this.y === 0) {
         alert('You Win!');
+        
       }
     }
   }
