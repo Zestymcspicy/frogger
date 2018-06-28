@@ -94,7 +94,7 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.checkWin();
+        setInterval(player.checkWin(),2000);
      }
 
     /* This function initially draws the "game level", it will then call

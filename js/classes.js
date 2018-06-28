@@ -35,20 +35,22 @@ class Player extends Entity {
           }break;
       }
     };
-    checkCollisions() {
+    resetChar() {
+      this.x=2;
+      this.y=5;
+    };
+    checkCollisions(dt) {
       for (let enemy of allEnemies){
-        if (Math.ceil(enemy.x)===player.x&&enemy.y===player.y){
-          alert("You got smoked son!");
-          this.x=2;
-          this.y=5;
+        if (Math.floor(enemy.x)===player.x&&Math.floor(enemy.y)===player.y){
+          this.resetChar();
           allEnemies.map(bug => bug.x=4.9999999999);
         }
         }
     };
-    checkWin() {
+    checkWin(dt) {
       if (this.y === 0) {
-        alert('You Win!');
-        
+        this.resetChar()
+        console.log('You Win!');
       }
     }
   }
@@ -60,15 +62,17 @@ class Enemy extends Entity {
     this.sprite += 'enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.speed = Math.random()/20;
+    this.speed = Math.random()/20+.01;
   }
     update(dt){
       if (this.x<5){
         this.x += this.speed;
+        /*will restart the enemy at the left side of the screen
+        with a new random speed and y position*/
       } else if (this.x > 5) {
         this.x =-1;
-        this.y =Math.floor(Math.random()*4)+1;
-        this.speed = Math.random()/20;
+        this.y =Math.floor(Math.random()*3)+1;
+        this.speed = Math.random()/20+.01;
       }
     }
   }
