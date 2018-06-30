@@ -7,4 +7,4 @@ Download and install this repository.  Open the file locally in your favorite br
 
 ## Playing the Game
 
-The arrow keys move the character around the screen.  The goal is to get to the water.  If you collide with a roach, you'll be forced to start over.
+The arrow keys move the character around the screen.  The goal is to get to the water.  If you get to the water you receive 10 points.  If you collide with a roach, you'll be forced to start over and lose 5 points.

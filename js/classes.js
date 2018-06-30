@@ -1,3 +1,4 @@
+/*the video on slack also helped me get this going.*/
 class Entity {
   constructor() {
     this.sprite = 'images/'
@@ -19,6 +20,7 @@ class Player extends Entity {
     super();
     this.sprite += 'char-boy.png';
   }
+  /*moves the character and controls the borders*/
     handleInput(dir) {
       if (this.movementEnabled === true){
         switch(dir) {
@@ -41,6 +43,7 @@ class Player extends Entity {
         }
       }
     };
+    //sets the character back at the beginning, adjusts score, and resets timer
     resetChar(dt) {
       this.sprite = 'images/char-boy.png'
       this.x=2;
