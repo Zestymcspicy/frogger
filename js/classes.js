@@ -45,7 +45,9 @@ class Player extends Entity {
     };
     checkCollisions(dt) {
       for (let enemy of allEnemies){
-        if (Math.floor(enemy.x)===player.x && enemy.y===player.y){
+        if (enemy.x>this.x-.5 &&
+          enemy.x<this.x+.5 &&
+          enemy.y===this.y){
           this.playerDeath();
           this.movementEnabled = false;
           allEnemies.map(bug => bug.speed=0);
@@ -61,7 +63,7 @@ class Player extends Entity {
       if (this.y === 0) {
         this.sprite = 'images/char-boy-win.png';
         setTimeout(function () {
-          player.resetChar();
+          player.resetChar;
           alert('You Win!');
       },10);
     }
