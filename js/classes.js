@@ -20,19 +20,19 @@ class Player extends Entity {
       if (this.movementEnabled === true){
         switch(dir) {
           case 'up':
-            if (this.y>0){
+            if (this.y>0) {
               this.y--;
             }break;
           case 'down':
-            if (this.y<5){
+            if (this.y<5) {
               this.y++;
             }break;
           case 'left':
-            if (this.x>0){
+            if (this.x>0) {
               this.x--;
             }break;
           case 'right':
-            if (this.x<4){
+            if (this.x<4) {
               this.x++;
             }break;
         }
@@ -60,28 +60,28 @@ class Player extends Entity {
     checkWin(dt) {
       if (this.y === 0) {
         this.sprite = 'images/char-boy-win.png';
-        setTimeout(function (){
+        setTimeout(function () {
           player.resetChar();
           alert('You Win!');
       },10);
     }
   }
-  playerDeath(dt){
+  playerDeath(dt) {
     this.sprite = 'images/char-boy-dead.png';
   }
 }
 
 
 class Enemy extends Entity {
-  constructor(x, y){
+  constructor(x, y) {
     super();
     this.sprite += 'enemy-bug.png';
     this.x = x;
     this.y = y;
     this.speed = Math.random()/20+.01;
   }
-    update(dt){
-      if (this.x<5){
+    update(dt) {
+      if (this.x<5) {
         this.x += this.speed;
         /*will restart the enemy at the left side of the screen
         with a new random speed and y position*/
