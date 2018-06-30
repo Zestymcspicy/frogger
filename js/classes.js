@@ -3,6 +3,7 @@ class Entity {
     this.sprite = 'images/'
     this.x = 2;
     this.y = 5;
+    this.movementEnabled  = true;
   }
 
   render() {
@@ -16,23 +17,25 @@ class Player extends Entity {
     this.sprite += 'char-boy.png';
   }
     handleInput(dir) {
-      switch(dir) {
-        case 'up':
-          if (this.y>0){
-            this.y--;
-          }break;
-        case 'down':
-          if (this.y<5){
-            this.y++;
-          }break;
-        case 'left':
-          if (this.x>0){
-            this.x--;
-          }break;
-        case 'right':
-          if (this.x<4){
-            this.x++;
-          }break;
+      if (this.movementEnabled === true){
+        switch(dir) {
+          case 'up':
+            if (this.y>0){
+              this.y--;
+            }break;
+          case 'down':
+            if (this.y<5){
+              this.y++;
+            }break;
+          case 'left':
+            if (this.x>0){
+              this.x--;
+            }break;
+          case 'right':
+            if (this.x<4){
+              this.x++;
+            }break;
+        }
       }
     };
     resetChar() {
@@ -44,8 +47,10 @@ class Player extends Entity {
       for (let enemy of allEnemies){
         if (Math.floor(enemy.x)===player.x && enemy.y===player.y){
           this.playerDeath();
+          this.movementEnabled = false;
           allEnemies.map(bug => bug.speed=0);
           setTimeout(function () {
+            player.movementEnabled = true;
             player.resetChar();
             allEnemies.map(bug => bug.x=5.1);
           }, 1500);
@@ -57,13 +62,12 @@ class Player extends Entity {
         this.sprite = 'images/char-boy-win.png';
         setTimeout(function (){
           player.resetChar();
-          console.log('You Win!');
-      },3000);
+          alert('You Win!');
+      },10);
     }
   }
   playerDeath(dt){
     this.sprite = 'images/char-boy-dead.png';
-
   }
 }
 
