@@ -4,6 +4,9 @@ class Entity {
     this.x = 2;
     this.y = 5;
     this.movementEnabled  = true;
+    this.score = 0;
+    this.start = Date.now();
+    this.winOrDeath = undefined;
   }
 
   render() {
@@ -38,10 +41,17 @@ class Player extends Entity {
         }
       }
     };
-    resetChar() {
+    resetChar(dt) {
       this.sprite = 'images/char-boy.png'
       this.x=2;
       this.y=5;
+      this.start = Date.now();
+      if (this.winOrDeath==="Win"){
+        this.score += 10;
+      } else if (this.winOrDeath==="Death"){
+        this.score -= 5;
+      }
+      this.winOrDeath = undefined;
     };
     checkCollisions(dt) {
       for (let enemy of allEnemies){
@@ -62,14 +72,15 @@ class Player extends Entity {
     checkWin(dt) {
       if (this.y === 0) {
         this.sprite = 'images/char-boy-win.png';
-        setTimeout(function () {
-          player.resetChar;
-          alert('You Win!');
-      },10);
+        this.winOrDeath = 'Win';
+        setTimeout(function() {
+          player.resetChar();
+        }, 1000);
     }
   }
   playerDeath(dt) {
     this.sprite = 'images/char-boy-dead.png';
+    this.winOrDeath = 'Death';
   }
 }
 

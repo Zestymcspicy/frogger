@@ -136,6 +136,9 @@ var Engine = (function(global) {
                  * we're using them over and over.
                  */
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+                ctx.font = 'lighter 24px sans-serif';
+                ctx.fillStyle= '#EAEAAF'
+                ctx.fillText(`Score: ${player.score} Time: ${Math.floor((lastTime-player.start)/1000)}`, 10, 75);
             }
         }
 
