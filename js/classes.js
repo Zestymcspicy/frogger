@@ -1,4 +1,5 @@
 /*the video on slack also helped me get this going.*/
+'use strict';
 class Entity {
   constructor() {
     this.sprite = 'images/'
@@ -21,37 +22,41 @@ class Player extends Entity {
     this.sprite += 'char-boy.png';
   }
   /*moves the character and controls the borders*/
-    handleInput(dir) {
-      if (this.movementEnabled === true){
-        switch(dir) {
-          case 'up':
-            if (this.y>0) {
-              this.y--;
-            }break;
-          case 'down':
-            if (this.y<5) {
-              this.y++;
-            }break;
-          case 'left':
-            if (this.x>0) {
-              this.x--;
-            }break;
-          case 'right':
-            if (this.x<4) {
-              this.x++;
-            }break;
+  handleInput(dir) {
+    if (this.movementEnabled === true);
+      switch(dir) {
+        case 'up':
+          if (this.y>0) {
+            this.y--;
+          }
+          break;
+        case 'down':
+          if (this.y<5) {
+            this.y++;
+          }
+          break;
+        case 'left':
+          if (this.x>0) {
+            this.x--;
+          }
+          break;
+        case 'right':
+          if (this.x<4) {
+            this.x++;
+          }
+          break;
         }
-      }
-    };
+      };
+
     //sets the character back at the beginning, adjusts score, and resets timer
     resetChar(dt) {
       this.sprite = 'images/char-boy.png'
       this.x=2;
       this.y=5;
       this.start = Date.now();
-      if (this.winOrDeath==="Win"){
+      if (this.winOrDeath==='Win'){
         this.score += 10;
-      } else if (this.winOrDeath==="Death"){
+      } else if (this.winOrDeath==='Death'){
         this.score -= 5;
       }
       this.winOrDeath = undefined;

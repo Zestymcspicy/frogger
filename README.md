@@ -1,7 +1,7 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-##Installation and Starting the Game
+## Installation and Starting the Game
 
 Download and install this repository.  Open the index.html file locally in your favorite browser.
 
