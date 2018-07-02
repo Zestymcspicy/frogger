@@ -63,15 +63,15 @@ class Player extends Entity {
     };
     checkCollisions(dt) {
       for (let enemy of allEnemies){
-        if (enemy.x>this.x-.5 &&
+        if (enemy.x>this.x-.7 &&
           enemy.x<this.x+.5 &&
           enemy.y===this.y){
-          this.playerDeath();
           this.movementEnabled = false;
+          this.playerDeath();
           allEnemies.map(bug => bug.speed=0);
-          setTimeout(function () {
-            player.movementEnabled = true;
-            player.resetChar();
+          setTimeout(() => {
+            this.movementEnabled = true;
+            this.resetChar();
             allEnemies.map(bug => bug.x=5.1);
           }, 1500);
         }
@@ -81,11 +81,9 @@ class Player extends Entity {
       if (this.y === 0) {
         this.sprite = 'images/char-boy-win.png';
         this.winOrDeath = 'Win';
-        setTimeout(function() {
-          player.resetChar();
-        }, 1000);
+        setTimeout(() => this.resetChar(), 1000);
     }
-  }
+  };
   playerDeath(dt) {
     this.sprite = 'images/char-boy-dead.png';
     this.winOrDeath = 'Death';
