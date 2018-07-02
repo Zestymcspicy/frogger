@@ -47,7 +47,9 @@ class Player extends Entity {
           allEnemies.map(bug => bug.speed=0);
           setTimeout(function () {
             player.resetChar();
-            allEnemies.map(bug => bug.x=5.1);
+            for (const bug of allEnemies){
+              bug.enemyReset();
+            }
           }, 1500);
         }
         }
@@ -76,15 +78,18 @@ class Enemy extends Entity {
     this.y = y;
     this.speed = Math.random()/20+.01;
   }
+    enemyReset(dt) {
+      this.x =-1;
+      this.y =Math.floor(Math.random()*3)+1;
+      this.speed = Math.random()/20+.01;
+    }
     update(dt){
       if (this.x<5){
         this.x += this.speed;
         /*will restart the enemy at the left side of the screen
         with a new random speed and y position*/
       } else if (this.x >= 5) {
-        this.x =-1;
-        this.y =Math.floor(Math.random()*3)+1;
-        this.speed = Math.random()/20+.01;
+        this.enemyReset();
       }
     }
   }
