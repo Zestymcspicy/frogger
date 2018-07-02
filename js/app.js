@@ -5,6 +5,7 @@
 // Place the player object in a variable called player
 
 const player = new Player();
+
 const allEnemies = [...Array(4)].map((_,i)=> new Enemy(0,Math.floor(Math.random()*3)+1));
 
 

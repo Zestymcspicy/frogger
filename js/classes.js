@@ -1,8 +1,14 @@
+/*the video on slack also helped me get this going.*/
+'use strict';
 class Entity {
   constructor() {
     this.sprite = 'images/'
     this.x = 2;
     this.y = 5;
+    this.movementEnabled  = true;
+    this.score = 0;
+    this.start = Date.now();
+    this.winOrDeath = undefined;
   }
 
   render() {
@@ -15,41 +21,58 @@ class Player extends Entity {
     super();
     this.sprite += 'char-boy.png';
   }
-    handleInput(dir) {
+  /*moves the character and controls the borders*/
+  handleInput(dir) {
+    if (this.movementEnabled === true);
       switch(dir) {
         case 'up':
-          if (this.y>0){
+          if (this.y>0) {
             this.y--;
-          }break;
+          }
+          break;
         case 'down':
-          if (this.y<5){
+          if (this.y<5) {
             this.y++;
-          }break;
+          }
+          break;
         case 'left':
-          if (this.x>0){
+          if (this.x>0) {
             this.x--;
-          }break;
+          }
+          break;
         case 'right':
-          if (this.x<4){
+          if (this.x<4) {
             this.x++;
-          }break;
-      }
-    };
-    resetChar() {
+          }
+          break;
+        }
+      };
+
+    //sets the character back at the beginning, adjusts score, and resets timer
+    resetChar(dt) {
       this.sprite = 'images/char-boy.png'
       this.x=2;
       this.y=5;
+      this.start = Date.now();
+      if (this.winOrDeath==='Win'){
+        this.score += 10;
+      } else if (this.winOrDeath==='Death'){
+        this.score -= 5;
+      }
+      this.winOrDeath = undefined;
     };
     checkCollisions(dt) {
       for (let enemy of allEnemies){
-        if (Math.floor(enemy.x)===player.x && enemy.y===player.y){
+        if (enemy.x>this.x-.7 &&
+          enemy.x<this.x+.5 &&
+          enemy.y===this.y){
+          this.movementEnabled = false;
           this.playerDeath();
           allEnemies.map(bug => bug.speed=0);
-          setTimeout(function () {
-            player.resetChar();
-            for (const bug of allEnemies){
-              bug.enemyReset();
-            }
+          setTimeout(() => {
+            this.movementEnabled = true;
+            this.resetChar();
+            allEnemies.map(bug => bug.x=5.1);
           }, 1500);
         }
         }
@@ -57,39 +80,34 @@ class Player extends Entity {
     checkWin(dt) {
       if (this.y === 0) {
         this.sprite = 'images/char-boy-win.png';
-        setTimeout(function (){
-          player.resetChar();
-          console.log('You Win!');
-      },3000);
+        this.winOrDeath = 'Win';
+        setTimeout(() => this.resetChar(), 1000);
     }
-  }
-  playerDeath(dt){
+  };
+  playerDeath(dt) {
     this.sprite = 'images/char-boy-dead.png';
-
+    this.winOrDeath = 'Death';
   }
 }
 
 
 class Enemy extends Entity {
-  constructor(x, y){
+  constructor(x, y) {
     super();
     this.sprite += 'enemy-bug.png';
     this.x = x;
     this.y = y;
     this.speed = Math.random()/20+.01;
   }
-    enemyReset(dt) {
-      this.x =-1;
-      this.y =Math.floor(Math.random()*3)+1;
-      this.speed = Math.random()/20+.01;
-    }
-    update(dt){
-      if (this.x<5){
+    update(dt) {
+      if (this.x<5) {
         this.x += this.speed;
         /*will restart the enemy at the left side of the screen
         with a new random speed and y position*/
       } else if (this.x >= 5) {
-        this.enemyReset();
+        this.x =-1;
+        this.y =Math.floor(Math.random()*3)+1;
+        this.speed = Math.random()/20+.01;
       }
     }
   }

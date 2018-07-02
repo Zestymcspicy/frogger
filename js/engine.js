@@ -133,9 +133,14 @@ var Engine = (function(global) {
                  * to start drawing and the y coordinate to start drawing.
                  * We're using our Resources helpers to refer to our images
                  * so that we get the benefits of caching these images, since
-                 * we're using them over and over.
+                 * we're using them over and over. Watched a video on slack
+                 that I can no longer find that helped immensely with getting
+                 started.
                  */
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+                ctx.font = 'lighter 24px sans-serif';
+                ctx.fillStyle= '#EAEAAF'
+                ctx.fillText(`Score: ${player.score} Time: ${Math.floor((lastTime-player.start)/1000)}`, 10, 75);
             }
         }
 
