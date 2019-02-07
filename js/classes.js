@@ -53,13 +53,13 @@ class Player extends Entity {
       this.sprite = 'images/char-boy.png'
       this.x=2;
       this.y=5;
-      this.start = Date.now();
       if (this.winOrDeath==='Win'){
         this.score += 10;
       } else if (this.winOrDeath==='Death'){
         this.score -= 5;
       }
       this.winOrDeath = undefined;
+      this.start = Date.now();
     };
     checkCollisions(dt) {
       for (let enemy of allEnemies){
@@ -82,6 +82,7 @@ class Player extends Entity {
         this.sprite = 'images/char-boy-win.png';
         this.winOrDeath = 'Win';
         setTimeout(() => this.resetChar(), 1000);
+
     }
   };
   playerDeath(dt) {

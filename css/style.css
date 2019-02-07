@@ -1,3 +1,41 @@
 body {
     text-align: center;
 }
+
+.arrow {
+  width:26%;
+  height: 100%;
+  justify-content: center;
+  border: black 1px solid;
+  border-radius: 8%;
+}
+
+
+#button-box {
+  height: 50%;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-around;
+}
+
+#up {
+  margin: 0 20%;
+}
+
+#left {
+  margin: 5% 8% 5% 0%;
+}
+
+#right {
+  margin: 5% 0% 5% 8%;
+}
+
+#down {
+  margin: 0 20%;
+} */
+
+@media screen and (max-width: 600px) {
+  #button-box {
+    display: flex;
+  }
+}

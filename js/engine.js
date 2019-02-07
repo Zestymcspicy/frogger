@@ -12,6 +12,7 @@
  * This engine makes the canvas' context (ctx) object globally available to make
  * writing app.js a little simpler to work with.
  */
+ var lastTime;
 
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
@@ -21,8 +22,7 @@ var Engine = (function(global) {
     var doc = global.document,
         win = global.window,
         canvas = doc.createElement('canvas'),
-        ctx = canvas.getContext('2d'),
-        lastTime;
+        ctx = canvas.getContext('2d');
 
     canvas.width = 505;
     canvas.height = 606;
@@ -181,7 +181,11 @@ var Engine = (function(global) {
         'images/enemy-bug.png',
         'images/char-boy.png',
         'images/char-boy-dead.png',
-        'images/char-boy-win.png'
+        'images/char-boy-win.png',
+        'images/up-arrow.png',
+        'images/down-arrow.png',
+        'images/left-arrow.png',
+        'images/right-arrow.png'        
     ]);
     Resources.onReady(init);
 

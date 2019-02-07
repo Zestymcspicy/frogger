@@ -23,3 +23,15 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+const screenControls = document.getElementsByClassName("arrow");
+let controlsArray = [];
+for(let i=0; i<screenControls.length; i++){
+  controlsArray.push(screenControls[i]);
+}
+console.log(controlsArray)
+controlsArray.forEach(x => {
+  x.addEventListener("click", function(e) {
+  player.handleInput(e.target.id);
+  });
+});
